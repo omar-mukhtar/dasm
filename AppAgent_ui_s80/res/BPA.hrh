@@ -1,0 +1,81 @@
+// This file is part of DASM (DTN Applications for Symbian Mobile-phones).
+// Copyright (C) 2006 Omar Mukhtar (omar.mukhtar@gmail.com)
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+//
+
+
+#ifndef __BPA_HRH__
+#define __BPA_HRH__
+
+#include <eikon.rsg>
+#include <s80eikfile.rsg>
+
+/** PBPA enumerate command codes */
+enum TBPACommandCodes
+{
+	// BPA menu commands
+	E_START_TCP_CLA = 1,
+	E_STOP_TCP_CLA,
+	E_START_BT_CLA,
+	E_STOP_BT_CLA,
+	E_TOGGLE_FRAGMENTATION_POLICY,
+	E_TOGGLE_CUSTODY_ACCEPTANCE_POLICY,
+	E_TOGGLE_BUNDLE_RECEPTION_SRR_POLICY,
+	E_TOGGLE_CUSTODY_ACCEPTANCE_SRR_POLICY,
+	E_TOGGLE_BUNDLE_FORWARDING_SRR_POLICY,
+	E_TOGGLE_BUNDLE_DELIVERY_SRR_POLICY,
+	E_TOGGLE_BUNDLE_DELETION_SRR_POLICY,
+	E_TOGGLE_APP_ACK_SRR_POLICY,
+	
+	// AppAgent menu commands
+	E_RECEIVE_BUNDLE = 50,
+	E_SEND_FILE,
+	E_RECEIVE_FILE,
+	
+	// Info menu commands
+	E_INFO_BT_ADDR = 100,
+	E_INFO_LOCAL_EID,
+	
+	// Log menu commands
+	E_LOG_TOGGLE_ALL = 150,
+	E_LOG_TOGGLE_BPA,
+	E_LOG_TOGGLE_ROUTER,
+	E_LOG_TOGGLE_TCP_CLA,
+	E_LOG_TOGGLE_TCP_CON,
+	E_LOG_TOGGLE_BT_CLA,
+	E_LOG_TOGGLE_BT_CON
+};
+
+
+enum TBPAControls
+{
+	E_CONTROL_ID_FILE_NAME_SEL = 1,
+	E_CONTROL_ID_SEND_FILE_HEADER_FROM,
+	E_CONTROL_ID_SEND_FILE_HEADER_TO,
+	E_CONTROL_ID_SEND_FILE_HEADER_SUBJ,
+	E_CONTROL_ID_LIFE_TIME,
+	E_CONTROL_ID_TRANSFER_CUSTODY,
+	E_CONTROL_ID_SRC_NODE_ACCEPT_CUSTODY,
+	E_CONTROL_ID_FRAGMENTATION_ALLOWED,
+	E_CONTROL_ID_SRR_BUNDLE_RECEPTION,
+	E_CONTROL_ID_SRR_CUSTODY_ACCEPTANCE,
+	E_CONTROL_ID_SRR_BUNDLE_FORWARDING,
+	E_CONTROL_ID_SRR_BUNDLE_DELIVERY,
+	E_CONTROL_ID_SRR_BUNDLE_DELETION,
+	E_CONTROL_ID_SRR_APP_ACK
+};
+
+#endif // __BPA_HRH__

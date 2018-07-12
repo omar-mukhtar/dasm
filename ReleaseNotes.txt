@@ -1,0 +1,144 @@
+Release Notes : July 03, 2006
+=============================
+
+DASM : DTN Applications for Symbian Mobile-phones
+Version 0.1
+
+AUTHOR(s)
+---------
+
+This work has been carried out in Networking Lab. of Helsinki University of 
+Technology (www.netlab.tkk.fi), under supervision of Prof. Joerg Ott.
+
+Omar Mukhtar <omar@netlab.tkk.fi>
+Joerg Ott <jo@netlab.tkk.fi>
+
+This work is provided under GPL. For details, see accompanying license file.
+
+NOTE: The development work was done in Microsoft Windows 2000 environment, as all
+of the SDK's for Symbian are available for that platform. 
+
+KNOWN ISSUES:
+-------------
+
+	1. Nokia Communicator 9500 has a bug, which causes wrong UTC calculations.
+	   Please download the patch from www.nokia.com and install it on 9500 machine.
+	
+	2. Bundle-Fragmentation is not fully supported. DASMv0.1 can reassemble fragments,
+	   but cannot send fragmented bundles.
+	
+	3. Custody Transfer is not fully supported. Bundles are not stored in persistent storage.
+	
+
+BUILD for S80:
+--------------
+
+	1. Install S80 SDK. Get it from Forum Nokia website (www.forum.nokia.com).
+	
+	2. Also install PC Suite from the CD in phone accessories box.
+	
+	3. On command prompt, go to "AppAgent_ui_s80" folder.
+	
+	4. On command prompt, type the following commands to build installation 
+	   file, "bpa.sis":
+	
+		bldmake clean
+		bldmake bldfiles
+		abld reallyclean
+		abld build armi urel
+		makesis bpa.pkg bpa.sis
+	
+BUILD S60:
+----------
+
+	S60 version still needs some fixes, and will be provided soon.
+
+CONFIGURATION:
+--------------
+
+	1. Install bpa_s80.sis on Nokia 9500/9300(i) communicator using PC suite.
+	
+	2. Create the following folders manually:
+	
+		c:\data\dtn\config\
+		c:\data\dtn\in\
+		c:\data\dtn\out\
+	
+	3. Copy accompanying "routes.txt" and "bpa_config.txt" files (from BPA folder of package)
+	   to the folder "c:\data\dtn\config\" on mobile phone. You can use PC suite utilities.
+	
+	4. Modify the files accordingly to configure a DTN node and routing
+	   information.
+	
+	5. Create and configure an access point for WLAN (see device's User
+	   Manual for details).
+
+
+USAGE:
+------
+
+	1. Execute the application. This is a sample application to demonstrate
+	   the functionality of BPA node. Other applications can be built using the
+	   API.
+	
+	2. Execute menu command "BPA->Toggle Custody Acceptance Policy" to enable
+	   this policy. This enables DTN accepting custody of bundles.
+	
+	3. From "CLA" menu, enable TCP-CLA if needed.
+	
+	4. From "CLA" menu, enable BT-CLA if needed. Remember to switch-off Bluetooth
+	   manually before enabling CLA, and switching it on back after enabling
+	   BT-CLA.
+	
+	5. Enable Log display from "Log" menu.
+	
+	6. Use "Send File" to send a file to a particular DTN node. This file will be
+	   sent with an additional mail header prepended and can be received using
+	   "dtnrecv" utility of Berkeley reference implementation, DTN2. 
+	
+	7. Use "Show Received File" to check for a new incoming file. It will be
+	   saved to C:\data\dtn\in\ folder. Open native FileManager program to view the
+	   contents of file using built-in applications. Files can be sent by "dtnsend"
+	   utility of DTN2 package, provided a mail header is prepended.
+	   
+	NOTE: To determine bluetooth device MAC address of the phone, use "Info" menu
+		  command "Bluetooth Address". Bluetooth must be activated prior to that.
+
+
+	(We are aware that this does not yet win a usability price but it is really 
+ 	 intended for demonstration purposes only at this point. :-)
+
+
+
+ROUTING FILE STRUCTURE:
+-----------------------
+
+	*** Routing file must have the name "routes.txt". At the moment it doesn't support
+		any comments.
+	
+	*** Here are some example routing records (each terminated by ';'):
+	
+		(EID)				(Transport Type) (PRIORITY)		(Node-Addr)		(Node socket/channel)
+		dtn://9500.dtn/1     tcp 			  1 			192.168.1.101 	5050 ;
+		
+		dtn://9300.dtn/1     rf_comm 			1 			0123456789AB 	14 ;
+
+	*** IP-networks are supported using TCP only.
+	
+	*** Bluetooth only uses basic SSP profile. It's can use any channel number between 1-30.
+		Bluetooth MAC address is provided in the form of 12-hex digits.
+
+
+CONFIG FILE STRUCTURE:
+----------------------
+
+	*** Entries are in Field-Value-tuples format, terminated by a ';'. Field and values are 
+		separated by '=' sign. No comments are supported at the moments.
+	
+	*** Examples are:
+		
+		local_eid=dtn://emulator.dtn/1;
+		report_to_eid=dtn://emulator.dtn/1;
+		tcp_listening_port=5050;
+		bt_listening_channel=14;
+

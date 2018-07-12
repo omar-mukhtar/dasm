@@ -1,0 +1,35 @@
+; This file is part of DASM (DTN Applications for Symbian Mobile-phones).
+; Copyright (C) 2006 Omar Mukhtar (omar.mukhtar@gmail.com)
+;
+; This program is free software; you can redistribute it and/or
+; modify it under the terms of the GNU General Public License
+; as published by the Free Software Foundation; either version 2
+; of the License, or (at your option) any later version.
+;
+; This program is distributed in the hope that it will be useful,
+; but WITHOUT ANY WARRANTY; without even the implied warranty of
+; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+; GNU General Public License for more details.
+;
+; You should have received a copy of the GNU General Public License
+; along with this program; if not, write to the Free Software
+; Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+;
+
+; bpa.pkg
+
+; Languages
+&EN
+
+; Header
+#{"bpa"},(0x10005B8B), 0, 1, 1
+
+; Platform compatibility
+(0x101F8ED2), 0, 0, 0, {"Series60ProductID"}
+
+; Target
+"D:\Installations\Symbian\7.0s\S80_DP2_0_SDK\Epoc32\release\armi\UREL\bpa.app"-"!:\system\apps\bpa\bpa.app"
+"D:\Installations\Symbian\7.0s\S80_DP2_0_SDK\Epoc32\data\z\system\apps\bpa\BPA.rSC"-"!:\system\apps\bpa\BPA.rSC"
+"D:\Installations\Symbian\7.0s\S80_DP2_0_SDK\Epoc32\data\z\system\apps\bpa\BPA_caption.rSC"-"!:\system\apps\bpa\BPA_caption.rSC"
+
+

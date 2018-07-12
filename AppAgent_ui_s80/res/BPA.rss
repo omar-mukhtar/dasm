@@ -1,0 +1,403 @@
+// This file is part of DASM (DTN Applications for Symbian Mobile-phones).
+// Copyright (C) 2006 Omar Mukhtar (omar.mukhtar@gmail.com)
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+//
+
+
+NAME BTPO
+
+#include <eikon.rh>
+
+#include "BPA.hrh"
+
+
+// ---------------------------------------------------------
+//   
+//    Define the resource file signature 
+//    This resource should be empty.
+//
+// ---------------------------------------------------------
+//
+RESOURCE RSS_SIGNATURE { }
+
+// ---------------------------------------------------------
+//   
+//    Default Document Name
+//
+// ---------------------------------------------------------
+//
+RESOURCE TBUF { buf=""; }
+
+// ---------------------------------------------------------
+//   
+//    Define default menu and CBA key.
+//
+// ---------------------------------------------------------
+
+RESOURCE EIK_APP_INFO
+{
+    menubar = r_bpa_menubar;
+    cba = r_bpa_cba;
+}
+    
+RESOURCE CBA r_bpa_cba
+{
+    buttons=
+    {
+        CBA_BUTTON { id = E_SEND_FILE; txt = "Send File";},
+        CBA_BUTTON { id = E_RECEIVE_FILE; txt = "Show Received File";}
+    };
+}
+// ---------------------------------------------------------
+//   
+//   r_bpa_menubar
+//   Menubar for BPA
+//
+// ---------------------------------------------------------
+//
+RESOURCE MENU_BAR r_bpa_menubar
+{
+    titles =
+    {
+    	MENU_TITLE {menu_pane = r_file_menu; txt = "File";},
+    	MENU_TITLE {menu_pane = r_bpa_menu; txt = "BPA";},
+    	MENU_TITLE {menu_pane = r_cla_menu; txt = "CLA";},
+        MENU_TITLE {menu_pane = r_app_agent_menu; txt = "AppAgent";},
+        MENU_TITLE {menu_pane = r_log_menu; txt = "Log";},
+        MENU_TITLE {menu_pane = r_info_menu; txt = "Info";}
+    };
+}
+
+
+// ---------------------------------------------------------
+//   
+//   r_file_menu
+//   Menu for "File"
+//
+// ---------------------------------------------------------
+//
+RESOURCE MENU_PANE r_file_menu
+{
+    items = 
+    {
+    	MENU_ITEM {command = EEikCmdExit; txt = "Exit";}
+    };
+}
+
+
+// ---------------------------------------------------------
+//   
+//   r_bpa_menu
+//   Menu for "BPA"
+//
+// ---------------------------------------------------------
+//
+RESOURCE MENU_PANE r_bpa_menu
+{
+    items = 
+    {
+    	MENU_ITEM {command = E_TOGGLE_FRAGMENTATION_POLICY; txt = "Toggle Fragmentation Policy";},
+    	MENU_ITEM {command = E_TOGGLE_CUSTODY_ACCEPTANCE_POLICY; txt = "Toggle Custody Acceptance Policy";},
+    	MENU_ITEM {command = E_TOGGLE_BUNDLE_RECEPTION_SRR_POLICY; txt = "Toggle Bundle Reception SRR Policy";},
+    	MENU_ITEM {command = E_TOGGLE_CUSTODY_ACCEPTANCE_SRR_POLICY; txt = "Toggle Custody Acceptance SRR Policy";},
+    	MENU_ITEM {command = E_TOGGLE_BUNDLE_FORWARDING_SRR_POLICY; txt = "Toggle Bundle Forwarding SRR Policy";},
+    	MENU_ITEM {command = E_TOGGLE_BUNDLE_DELIVERY_SRR_POLICY; txt = "Toggle Bundle Delivery SRR Policy";},
+    	MENU_ITEM {command = E_TOGGLE_BUNDLE_DELETION_SRR_POLICY; txt = "Toggle Bundle Deletion SRR Policy";},
+    	MENU_ITEM {command = E_TOGGLE_APP_ACK_SRR_POLICY; txt = "Toggle App-Ack SRR Policy";}
+    };
+}
+
+// ---------------------------------------------------------
+//   
+//   r_cla_menu
+//   Menu for "CLA"
+//
+// ---------------------------------------------------------
+//
+RESOURCE MENU_PANE r_cla_menu
+{
+    items = 
+    {
+    	MENU_ITEM {command = E_START_TCP_CLA; txt = "Start TCP CLA";},
+    	MENU_ITEM {command = E_START_BT_CLA; txt = "Start Bluetooth CLA";}
+    };
+}
+
+// ---------------------------------------------------------
+//   
+//   r_log_menu
+//   Menu for "Logs"
+//
+// ---------------------------------------------------------
+//
+RESOURCE MENU_PANE r_log_menu
+{
+	items = 
+    {
+    	MENU_ITEM {command = E_LOG_TOGGLE_ALL; txt = "Toggle All Logging";},
+    	MENU_ITEM {command = E_LOG_TOGGLE_BPA; txt = "Toggle BPA Logging";},
+    	MENU_ITEM {command = E_LOG_TOGGLE_ROUTER; txt = "Toggle Router Logging";},
+    	MENU_ITEM {command = E_LOG_TOGGLE_TCP_CLA; txt = "Toggle TCP CLA Logging";},
+    	MENU_ITEM {command = E_LOG_TOGGLE_TCP_CON; txt = "Toggle TCP Connection Logging";},
+    	MENU_ITEM {command = E_LOG_TOGGLE_BT_CLA; txt = "Toggle BT CLA Logging";},
+    	MENU_ITEM {command = E_LOG_TOGGLE_BT_CON; txt = "Toggle BT Connection Logging";}
+    };
+}
+
+// ---------------------------------------------------------
+//   
+//   r_info_menu
+//   Menu for "Info"
+//
+// ---------------------------------------------------------
+//
+RESOURCE MENU_PANE r_info_menu
+{
+	items = 
+    {
+    	MENU_ITEM {command = E_INFO_BT_ADDR; txt = "Bluetooth Address";},
+    	MENU_ITEM {command = E_INFO_LOCAL_EID; txt = "Local EID";}
+    };
+}
+
+// ---------------------------------------------------------
+//   
+//   r_app_agent_menu
+//   Menu for "AppAgent"
+//
+// ---------------------------------------------------------
+//
+RESOURCE MENU_PANE r_app_agent_menu
+{
+    items = 
+    {
+    	MENU_ITEM {command = E_SEND_FILE; txt = "Send File";},
+    	MENU_ITEM {command = E_RECEIVE_FILE; txt = "Show Received File";}
+    };
+}
+
+// ---------------------------------------------------------
+//   
+//   r_file_name_sel_dialog
+//   Dialog to select a file name
+//
+// ---------------------------------------------------------
+//
+RESOURCE DIALOG r_file_name_sel_dialog
+{
+	title = "File Selection";
+	
+	// The file selector control over-rides the default Ok-Cancel layout...
+	// So need to define a custom button layout
+	//buttons = R_EIK_BUTTONS_CANCEL_OK;
+	
+	buttons = r_file_name_sel_dialog_buttons;
+	
+	flags = EEikDialogFlagWait;
+	
+	// if want to capture Esc/Cancel key response in OKExitL() of Dialog
+	// | EEikDialogFlagNotifyEsc;
+
+	items =
+	{
+		DLG_LINE
+		{
+			type = EEikCtFileNameSel;
+			prompt = "Select a file...";
+			id = E_CONTROL_ID_FILE_NAME_SEL;
+			control = FILENAMESELECTOR{};
+		}
+	};
+}
+
+// ---------------------------------------------------------
+//   
+//   r_file_name_sel_dialog_buttons
+//   Dialog buttons custom layout
+//
+// ---------------------------------------------------------
+//
+
+RESOURCE DLG_BUTTONS r_file_name_sel_dialog_buttons
+{
+	buttons = 
+	{
+		//Note that the first button is empty.
+        //When the FileSel control has focus this is replaced by a "Change" button. 
+        DLG_BUTTON { id = EEikBidBlank; button = CMBUT {txt = "";}; }, 
+        DLG_BUTTON { id = EEikBidOk; button = CMBUT {txt = "OK";}; }, 
+        DLG_BUTTON { id = EEikBidBlank; button = CMBUT {txt = "";}; }, 
+        DLG_BUTTON { id = EEikBidCancel; button = CMBUT {txt = "Cancel";}; }
+	};
+}
+
+
+// ---------------------------------------------------------
+//   
+//   r_file_name_sel_dialog_buttons
+//   Dialog buttons custom layout
+//
+// ---------------------------------------------------------
+//
+RESOURCE TBUF r_tbuf_invalid_value
+{
+	buf = "Field is empty or contains invalid value...";
+}
+
+// ---------------------------------------------------------
+//   
+//   r_file_name_sel_dialog
+//   Dialog to select a file name
+//
+// ---------------------------------------------------------
+//
+RESOURCE DIALOG r_send_file_dialog
+{
+	title = "Send File";
+	
+	buttons = R_EIK_BUTTONS_CANCEL_OK;
+	
+	flags = EEikDialogFlagWait;
+
+	items =
+	{
+		DLG_LINE
+		{
+			type = EEikCtEdwin;
+			prompt = "From:";
+			id = E_CONTROL_ID_SEND_FILE_HEADER_FROM;
+			control = EDWIN{ width = 25; maxlength = 2048; };
+		},
+		
+		DLG_LINE
+		{
+			type = EEikCtEdwin;
+			prompt = "To:";
+			id = E_CONTROL_ID_SEND_FILE_HEADER_TO;
+			control = EDWIN{ width = 25; maxlength = 2048; };
+		},
+		
+		DLG_LINE
+		{
+			type = EEikCtEdwin;
+			prompt = "Subject:";
+			id = E_CONTROL_ID_SEND_FILE_HEADER_SUBJ;
+			control = EDWIN{ width = 25; maxlength = 2048; };
+		}
+	};
+}
+
+// ---------------------------------------------------------
+//   
+//   r_bundle_options_dialog
+//   Dialog to set bundle sending options
+//
+// ---------------------------------------------------------
+//
+RESOURCE DIALOG r_bundle_options_dialog
+{
+	title = "Bundle Options";
+	
+	buttons = R_EIK_BUTTONS_CANCEL_OK;
+	
+	flags = EEikDialogFlagWait;
+
+	items =
+	{
+		DLG_LINE
+		{
+			type = EEikCtDurationEditor;
+			prompt = "Life Time";
+			id = E_CONTROL_ID_LIFE_TIME;
+			control = DURATION_EDITOR
+					  {
+					  	minDuration=DURATION
+					  	{
+					  		seconds = 60;	// 1 minute
+					  	};
+					  	maxDuration=DURATION
+					  	{
+					  		seconds = 2147483647;	// (2^31)-1 ~= 68 minutes
+					  	};
+					  	flags = EEikTimeWithoutSecondsField; //Suppress seconds field in control.
+					  };
+		},
+		
+		DLG_LINE
+		{
+			type = EEikCtCheckBox;
+			prompt = "Transfer Custody";
+			id = E_CONTROL_ID_TRANSFER_CUSTODY;
+		},
+		
+		DLG_LINE
+		{
+			type = EEikCtCheckBox;
+			prompt = "Source node must accept custody";
+			id = E_CONTROL_ID_SRC_NODE_ACCEPT_CUSTODY;
+		},
+		
+		DLG_LINE
+		{
+			type = EEikCtCheckBox;
+			prompt = "Fragmentation Allowed";
+			id = E_CONTROL_ID_FRAGMENTATION_ALLOWED;
+		},
+		
+		DLG_LINE
+		{
+			type = EEikCtCheckBox;
+			prompt = "B-SRR Bundle Reception";
+			id = E_CONTROL_ID_SRR_BUNDLE_RECEPTION;
+		},
+		
+		DLG_LINE
+		{
+			type = EEikCtCheckBox;
+			prompt = "B-SRR Custody Accptance";
+			id = E_CONTROL_ID_SRR_CUSTODY_ACCEPTANCE;
+		},
+		
+		DLG_LINE
+		{
+			type = EEikCtCheckBox;
+			prompt = "B-SRR Bundle Forwarding";
+			id = E_CONTROL_ID_SRR_BUNDLE_FORWARDING;
+		},
+		
+		DLG_LINE
+		{
+			type = EEikCtCheckBox;
+			prompt = "B-SRR Bundle Delivery";
+			id = E_CONTROL_ID_SRR_BUNDLE_DELIVERY;
+		},
+		
+		DLG_LINE
+		{
+			type = EEikCtCheckBox;
+			prompt = "B-SRR Bundle Deletion";
+			id = E_CONTROL_ID_SRR_BUNDLE_DELETION;
+		},
+		
+		DLG_LINE
+		{
+			type = EEikCtCheckBox;
+			prompt = "B-SRR Application Acknowledgement";
+			id = E_CONTROL_ID_SRR_APP_ACK;
+		}
+	};
+}
+

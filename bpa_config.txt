@@ -1,0 +1,4 @@
+local_eid=dtn://emulator.dtn/1;
+report_to_eid=dtn://emulator.dtn/1;
+tcp_listening_port=5050;
+bt_listening_channel=14;
